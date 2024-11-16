@@ -1,0 +1,11 @@
+@media only screen and (max-width: 768px) {
+  .signupcont {
+    width: 100%;
+  }
+  .signupStep {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}

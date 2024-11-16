@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+.modal_one {
+  outline: none !important;
+  border: none !important;
+  width: 60vw !important;
+  height: 95vh !important;
+  border-radius: 20px !important;
+  background-color: rgb(255, 255, 255) !important;
+  position: relative;
+  padding: 0px 0px !important;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f70c4b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.modal_two {
+  width: max-content !important;
+  height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 0px !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+}
+td {
+  text-align: center;
+}
+tr {
+  height: 50px;
+}
+.docs {
+  color: black;
+  background-color: #f1f1f1;
+}
+.docs > h1 {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 10px 0px;
+  text-align: center;
+  font-family: "IBM Plex Serif", serif;
+}
+.docs > h2 {
+  font-size: 25px;
+  font-weight: bolder;
+  color: rgb(53, 52, 52);
+  margin: 10px 0px;
+  font-family: "IBM Plex Serif", serif;
+}
+.docs > h3 {
+  font-size: 20px;
+  font-weight: bolder;
+  color: rgb(53, 52, 52);
+
+  font-family: "IBM Plex Serif", serif;
+}
+.docs > p {
+  font-size: 15px;
+  margin-bottom: 15px;
+  font-family: "IBM Plex Serif", serif;
+}
+.docs > ul {
+  list-style-type: square;
+  margin-left: 20px;
+}
+.docs > ol > li {
+  list-style-type: square;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+.docs > ul > li {
+  list-style-type: square;
+
+  margin-top: 15px;
+}
+.docStart {
+  h4 {
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 800;
+    font-size: 18px;
+  }
+}
+.prepare {
+  p {
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: rgb(27, 25, 25);
+  }
+}
+.generate {
+  p {
+    font-family: "Raleway", sans-serif;
+    font-weight: 200;
+    font-size: 20px;
+    color: rgb(27, 25, 25);
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .modal_one {
+    width: 80vw !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .modal_one {
+    width: 95vw !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .docs > h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px 0px;
+    text-align: center;
+    font-family: "IBM Plex Serif", serif;
+    /* display: none; */
+  }
+  .docs > h2 {
+    font-size: 20px;
+    font-weight: bolder;
+    color: rgb(53, 52, 52);
+    margin: 10px 0px;
+    font-family: "IBM Plex Serif", serif;
+  }
+  .docs > h3 {
+    font-size: 18px;
+    font-weight: bolder;
+    color: rgb(53, 52, 52);
+
+    font-family: "IBM Plex Serif", serif;
+  }
+  .docs > p {
+    font-size: 12px;
+    margin-bottom: 15px;
+    font-family: "IBM Plex Serif", serif;
+  }
+  .docs > ul {
+    list-style-type: square;
+    margin-left: 20px;
+  }
+}

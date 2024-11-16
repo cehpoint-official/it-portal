@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.contentMain {
+  height: 500px;
+  width: 100%;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 20px 20px;
+  margin: 20px 0px;
+}
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@500&family=Nunito:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quattrocento:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400&display=swap");
+
+.contentMain {
+  p {
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  input,
+  textarea {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 8px;
+  }
+  .stepCount {
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgb(40, 39, 39);
+    margin-bottom: 20px;
+  }
+  h4 {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgb(34, 30, 30);
+  }
+  .cost {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(34, 30, 30);
+  }
+}
+.inputForm {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.uiux {
+  font-family: "Fira Sans", sans-serif;
+}
+/* .MuiBox-root {
+  outline: none !important;
+  border: none !important;
+  width: 50vw !important;
+  height: 200px !important;
+  border-radius: 20px !important;
+  background-color: rgb(255, 255, 255) !important;
+} */
+.mainTitle {
+  font-family: "Quattrocento", serif;
+}
+@layer base {
+  input,
+  textarea {
+    border: 1px solid rgb(192, 190, 190);
+  }
+
+  input:focus {
+    border-color: rgb(249, 19, 73);
+  }
+  textarea:focus {
+    border-color: rgb(248, 27, 97);
+  }
+}
+@media only screen and (max-width: 900px) {
+  .contentMain {
+    h2 {
+      font-size: 20px;
+    }
+  }
+}

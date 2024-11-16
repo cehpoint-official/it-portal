@@ -1,0 +1,12 @@
+.final {
+  h4 {
+    font-size: 20px;
+    color: rgb(42, 41, 41);
+    font-weight: 400;
+  }
+  p {
+    font-size: 18px;
+    color: rgb(42, 41, 41);
+    font-weight: 400;
+  }
+}

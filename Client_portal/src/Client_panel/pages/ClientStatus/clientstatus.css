@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&family=Titillium+Web:wght@600&display=swap");
+
+.Pending {
+  background-color: rgb(79, 74, 0);
+}
+.Approved {
+  background-color: rgb(10, 145, 25);
+}
+.NotApproved {
+  background-color: rgba(247, 2, 2, 0.904);
+}
+.project_cl {
+  tr > th {
+    color: rgb(48, 46, 46);
+    font-size: 17px;
+    font-family: "Oxygen", sans-serif;
+    font-weight: 200;
+  }
+  button {
+    color: rgb(255, 252, 252);
+    font-size: 17px;
+    font-family: "Oxygen", sans-serif;
+    font-weight: 200;
+  }
+  .admin_title {
+    font-size: 25px;
+    color: rgb(0, 0, 0);
+    font-family: "Oxygen", sans-serif;
+    font-weight: 400;
+    background-color: white;
+    padding: 5px 5px;
+    width: max-content;
+    border-radius: 5px;
+  }
+  td {
+    color: rgb(36, 33, 33);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Oxygen", sans-serif;
+  }
+}
+h2 {
+  color: rgba(24, 79, 134, 0.641);
+  font-size: 25px;
+  font-family: "Oxygen", sans-serif;
+  font-weight: 600;
+  margin-left: 20px;
+  /* background-color: rgba(24, 79, 134, 0.404); */
+  width: max-content;
+  margin-top: 10px;
+  padding: 5px 5px;
+  border-radius: 5px;
+}
+h4 {
+  color: rgb(248, 248, 248);
+  font-size: 15px;
+  font-family: "Oxygen", sans-serif;
+  font-weight: 200;
+}
+.profile {
+  transform: translateX(-100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: ease-in-out 0.3s;
+}
+
+.show {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  transform: translateX(0%);
+  transition: ease-in-out 0.3s;
+}

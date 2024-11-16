@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400&display=swap");
+
+.contentMain {
+  p {
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  input,
+  textarea {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  .stepCount {
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgb(40, 39, 39);
+  }
+}

@@ -1,0 +1,15 @@
+.modal_three {
+  width: 500px !important;
+  height: 60vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 10px !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+  div {
+    margin-top: 20px;
+  }
+}

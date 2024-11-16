@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400&display=swap");
+
+.ui_info {
+  font-family: "IBM Plex Serif", serif;
+}
+
+@media only screen and (max-width: 900px) {
+  .devInput {
+    width: 100%;
+  }
+}
+.err {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+}

@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Quattrocento:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap");
+.footer {
+  p {
+    font-family: "Quattrocento", serif;
+    font-weight: 200;
+    font-size: 13px;
+    color: rgb(182, 178, 178);
+  }
+}

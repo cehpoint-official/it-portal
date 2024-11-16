@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&family=Titillium+Web:wght@600&display=swap");
+.admin > tr > th > h4 {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  font-family: "Titillium Web", sans-serif;
+}
+.admin_main {
+  /* background-color: rgb(2, 2, 21); */
+  background-color: rgb(241, 240, 240);
+}
+.admin > tr > th {
+  padding: 15px;
+  background-color: rgb(5, 28, 119);
+  border-bottom: 1px solid rgb(204, 7, 7);
+}
+.admin_cont {
+  /* background-color: rgb(0, 0, 0); */
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.admin > tr > td {
+  font-size: 15px;
+  color: rgb(65, 64, 64);
+  font-weight: bolder;
+  font-family: "Oxygen", sans-serif;
+
+  /* background-color: rgb(3, 3, 33); */
+  /* background-color: rgb(6, 6, 29); */
+}
+
+.admin > tr:hover {
+  /* background-color: rgb(1, 1, 1); */
+  background-color: rgb(238, 236, 237);
+}
+/* .admin > tr:hover {
+  background-color: rgb(16, 10, 60);
+} */
+.project_cont {
+  tr > th > h4 {
+    color: white;
+    font-size: 17px;
+    font-family: "Oxygen", sans-serif;
+    font-weight: 200;
+  }
+  .admin_title {
+    font-size: 25px;
+    color: rgb(0, 0, 0);
+    font-family: "Oxygen", sans-serif;
+    font-weight: 400;
+    background-color: white;
+    padding: 5px 5px;
+    width: max-content;
+    border-radius: 5px;
+  }
+  td {
+    color: white;
+    font-size: 13px;
+    font-weight: 200;
+    font-family: "Oxygen", sans-serif;
+  }
+}
+.adminprofile {
+  h3 {
+    font-family: "Oxygen", sans-serif;
+    font-weight: 200;
+    font-size: 17px;
+    color: rgb(230, 238, 246);
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #fcf9f918;
+    margin-top: 10px;
+  }
+  h5 {
+    font-family: "Oxygen", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+  }
+}
+.Pending {
+  background-color: rgba(254, 239, 24, 0.362);
+}
+.Approved {
+  background-color: rgba(4, 76, 12, 0.362);
+}
+.NotApproved {
+  background-color: rgba(247, 2, 2, 0.362);
+}
+.dark {
+  background-color: #0f172a;
+  color: #ddd;
+  --softBg: #1f273a;
+  --softTextColor: #a6a6a6;
+}
+
+.light {
+  --bg: white;
+  --textColor: black;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+}
+.closebtn {
+  display: none;
+}
+@media only screen and (max-width: 900px) {
+  .project_cont {
+    tr > th > h4 {
+      color: white;
+      font-size: 14px;
+      font-family: "Oxygen", sans-serif;
+      font-weight: 200;
+    }
+    td {
+      color: white;
+      font-size: 12px;
+    }
+    button {
+      font-size: 10px;
+      padding: 5px 5px;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .slider {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    transform: translateX(-100%);
+    transition: ease-in-out 0.3s;
+    width: 300px;
+    border-right: 1px solid rgb(72, 75, 75);
+  }
+  .show {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    transform: translateX(0%);
+    transition: ease-in-out 0.3s;
+  }
+  .closebtn {
+    display: block;
+  }
+  .projectMain {
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+  }
+  .adminMain {
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .project_cont {
+    tr > th > h4 {
+      color: white;
+      font-size: 12px;
+      font-family: "Oxygen", sans-serif;
+      font-weight: 200;
+    }
+    .admin_title {
+      font-size: 25px;
+      color: rgb(0, 0, 0);
+      font-family: "Oxygen", sans-serif;
+      font-weight: 400;
+      background-color: white;
+      padding: 5px 5px;
+      width: max-content;
+      border-radius: 5px;
+    }
+    td {
+      color: white;
+      font-size: 11px;
+      font-weight: 200;
+      font-family: "Oxygen", sans-serif;
+    }
+  }
+}
+@media only screen and (max-width: 500px) {
+  .project_cont {
+    tr > th > h4 {
+      color: white;
+      font-size: 10px;
+      font-family: "Oxygen", sans-serif;
+      font-weight: 200;
+    }
+    .admin_title {
+      font-size: 25px;
+      color: rgb(0, 0, 0);
+      font-family: "Oxygen", sans-serif;
+      font-weight: 400;
+      background-color: white;
+      padding: 5px 5px;
+      width: max-content;
+      border-radius: 5px;
+    }
+    td {
+      color: white;
+      font-size: 10px;
+      font-weight: 200;
+      font-family: "Oxygen", sans-serif;
+    }
+    td {
+      p {
+        font-size: 10px;
+      }
+    }
+  }
+  .projectMain {
+    width: 100%;
+  }
+  .ico {
+    font-size: 20px !important;
+  }
+}

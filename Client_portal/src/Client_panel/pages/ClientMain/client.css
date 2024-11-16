@@ -1,0 +1,18 @@
+@media only screen and (max-width: 1200px) {
+  .lotte {
+    width: 40%;
+  }
+  .detail_cont {
+    width: 60%;
+    padding: 40px 20px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .lotte {
+    display: none;
+  }
+  .detail_cont {
+    width: 100%;
+    padding: 40px 20px;
+  }
+}
