@@ -28,7 +28,7 @@ import { setuser, setadmin } from "../../../redux/AuthSlice";
 import { signout } from "../../../Firebase/SignOut";
 import { onAuthStateChanged } from "firebase/auth";
 const ClientStatus = () => {
-  const { user, isAdmin, name } = useSelector((state) => state.Auth);
+  const { user, isAdmin, name, isDeveloper } = useSelector((state) => state.Auth);
   const dispatch = useDispatch();
   const [project, setproject] = useState([]);
   const projectRef = useRef(project);
@@ -140,6 +140,9 @@ const ClientStatus = () => {
       });
   };
 
+  if(!user || isDeveloper){
+    return <Navigate to={"/"} />;
+  }
   if (!user || isAdmin) {
     return <Navigate to={"/"} />;
   }
@@ -148,7 +151,7 @@ const ClientStatus = () => {
     navigate("/details");
   };
 
-  console.log(project); 
+  // console.log(project); 
 
   return (
     <div className=" w-screen h-screen flex ">

@@ -6,7 +6,9 @@ import Steps from "../../components/StepUi/Steps";
 import ProjectName from "../ProjectName/ProjectName";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+
 import {
   increaseStep,
   decreaseStep,
@@ -45,7 +47,8 @@ const Client = () => {
   const handleOpenQo = () => setOpenQo(true);
   const handleCloseQo = () => setOpenQo(false);
   const dispatch = useDispatch();
-  const { user, isAdmin, name } = useSelector((state) => state.Auth);
+  const navigate = useNavigate();
+  const { user, isAdmin, name, isDeveloper } = useSelector((state) => state.Auth);
 
   const disablerr = () => {
     dispatch(disableErr());
@@ -131,9 +134,17 @@ const Client = () => {
     console.log(isAdmin);
     return <Navigate to={"/"} />;
   }
+
+  if (isDeveloper) {
+    console.log(isAdmin);
+    return <Navigate to={"/developer"} />;
+  }
   return (
     <div className=" w-screen h-screen flex">
       <div className=" detail_cont h-full  w-4/6 py-10 px-12">
+
+        
+
         <Steps />
         {/* <hr className=" h-1 w-full bg-slate-200 rounded-full mt-4" /> */}
         {step === 1 && <ProjectName />}
@@ -182,6 +193,14 @@ const Client = () => {
           loop={true}
         />
       </div>
+      <div className="fixed right-4 z-10 mt-4 flex justify-end font-medium">
+          <button 
+          className="bg-slate-500 p-2 rounded-lg text-white"
+          onClick={() => navigate("/projects")}
+          >
+            Skip for now < ArrowRightAltIcon/>
+          </button>
+        </div>
     </div>
   );
 };

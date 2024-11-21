@@ -36,6 +36,7 @@ const Clientsignup = ({ change }) => {
   const createrole = async (id) => {
     await setDoc(doc(db, "Roles", id), {
       isAdmin: false,
+      isDeveloper:false,
     });
   };
   const handlesignup = async (e) => {

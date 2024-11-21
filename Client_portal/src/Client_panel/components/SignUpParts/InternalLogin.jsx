@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../Firebase/firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { setadmin, setuser } from "../../../redux/AuthSlice";
+import { setadmin, setuser, setDeveloper } from "../../../redux/AuthSlice";
 import { ColorRing } from "react-loader-spinner";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/firebase";
@@ -29,25 +29,33 @@ const InternalLogin = () => {
   const test = () => {
     console.log("hello");
   };
-  const getadmin = async (id, displayName) => {
+  const getAdminOrDev = async (id, displayName) => {
     const docRef = doc(db, "Roles", id);
     const docSnap = await getDoc(docRef);
     // console.log(docSnap);
     if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data(), id, docSnap.data().name);
-      if (!docSnap.data().isAdmin) {
-        seterr(true);
-      } else {
+      console.log("Document data:", docSnap.data(), id, docSnap.data().name);
+
+      if (docSnap.data().isAdmin) {
         dispatch(setadmin(docSnap.data().isAdmin));
         dispatch(setuser({ uid: id, name: displayName }));
         navigate("/admin");
+      } 
+      else if(docSnap.data().isDeveloper) {
+        // console.log("here");
+        dispatch(setDeveloper(docSnap.data().isDeveloper));
+        dispatch(setuser({ uid: id, name: displayName }));
+        navigate("/developer");
+      }
+      else{
+        seterr(err)
       }
     } else {
       // docSnap.data() will be undefined in this case
       console.log("No such document!");
     }
   };
-  const signinAdmin = (email, password) => {
+  const signinAdminOrDeveloper = (email, password) => {
     // console.log(fields);
     if (fields.email.length !== 0 && fields.password.length >= 6) {
       setloading(true);
@@ -55,7 +63,7 @@ const InternalLogin = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           // console.log(user);
-          getadmin(user.uid, user.displayName);
+          getAdminOrDev(user.uid, user.displayName);
           setadminloading(false);
           return user.uid;
           // ...
@@ -71,7 +79,7 @@ const InternalLogin = () => {
   };
   const handlesignin = (e) => {
     e.preventDefault();
-    signinAdmin(fields.email, fields.password);
+    signinAdminOrDeveloper(fields.email, fields.password);
   };
   return (
     <motion.div

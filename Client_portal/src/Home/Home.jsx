@@ -36,7 +36,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [type, settype] = useState(0);
   const [firstsignup, setfirstSignup] = useState(false);
-  const { user, isAdmin, name } = useSelector((state) => state.Auth);
+  const { user, isAdmin, name, isDeveloper } = useSelector((state) => state.Auth);
   const { displayName, email, password, phone } = fields;
   const style = {
     position: "absolute",
@@ -79,12 +79,17 @@ const Home = () => {
     console.log(result.data);
   };
   
+  if(user && isDeveloper){
+    console.log("developer",isDeveloper); 
+    return <Navigate to={"/developer"} />;
+  }
+
   if (user && isAdmin) {
-    console.log(isAdmin);
+    console.log("admin",isAdmin);
     return <Navigate to={"/admin"} />;
   }
 
-  if (user && !isAdmin && !firstsignup) {
+  if (user && !isAdmin && !isDeveloper && !firstsignup) {
     return <Navigate to={"/projects"} />;
   }
 

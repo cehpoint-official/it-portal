@@ -49,7 +49,7 @@ const Admin = () => {
   const dispatch = useDispatch();
   const storage = getStorage();
 
-  const { developers, isLoading } = useFindAllDevelopers();
+  // const { developers, isLoading } = useFindAllDevelopers();
   // console.log(developers);
 
   const handleslide = () => {
@@ -241,7 +241,7 @@ const Admin = () => {
     });
   }, []);
   if (!isAdmin) {
-    console.log(isAdmin);
+    // console.log(isAdmin);
     return <Navigate to={"/"} />;
   }
   // useEffect(() => {

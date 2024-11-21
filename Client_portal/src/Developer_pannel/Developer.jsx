@@ -22,12 +22,25 @@ import {
   getStream,
   getBytes,
 } from "firebase/storage";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { signout } from "../Firebase/SignOut.js";
+import { setDeveloper } from "../redux/AuthSlice.js";
 
 function Developer() {
+  console.log("here 2");
+  
   const [slide, setslide] = useState(true);
   const [files, setFiles] = useState([]);
   // const [doc, setDoc] = useState();
   const storage = getStorage();
+  const { isDeveloper} = useSelector((state) => state.Auth);
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    signout();
+    dispatch(setDeveloper(false));
+  };
 
   const getAllProjects = async () => {
     const docRef = query(
@@ -65,6 +78,7 @@ function Developer() {
       };
       reader.readAsDataURL(blob);
     });
+    
   const getbase64 = (datauri) => {
     const base64 = datauri.split("base64,")[1];
     console.log(base64);
@@ -167,6 +181,10 @@ function Developer() {
     setslide(!slide);
   };
 
+  if(!isDeveloper){
+    console.log(isDeveloper);
+    return <Navigate to={"/"} />;
+  }
   // console.log(files);
 
 
@@ -184,7 +202,7 @@ function Developer() {
         </div>
         <div className=" w-full flex justify-center mb-4 rounded-md">
           <button
-            // onClick={logout}
+            onClick={logout}
             className=" bg-red-800 w-max px-2 py-1 text-red-100 rounded-md"
           >
             <ExitToAppIcon /> Sign Out
@@ -271,12 +289,12 @@ function Developer() {
                     <td>
                       <button>
                         {c?.isComplete.booleanValue ? (
-                          <button onClick={()=>handleComplete(c?.id)}>
-                            <CheckCircleIcon />
+                          <button className="flex gap-2 items-center" onClick={()=>handleComplete(c?.id)}>
+                            Completed <CheckCircleIcon />
                           </button>
                         ) : (
-                          <button onClick={() => handleComplete(c?.id)}>
-                            <CheckCircleOutlineIcon />
+                          <button className="flex gap-2 items-center" onClick={() => handleComplete(c?.id)}>
+                            Not Completed<CheckCircleOutlineIcon />
                           </button>
                         )}
                       </button>
