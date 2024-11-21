@@ -75,7 +75,7 @@ const Preferences = () => {
             Development Areas
           </p>
 
-          <div className=" flex flex-col mt-2">
+          <div className=" flex flex-col mt-2 flex-wrap">
             <TagsInput />
             {!apps[0] && err && (
               <p className="err text-red-600 italic text-sm font-light">

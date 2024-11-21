@@ -15,6 +15,8 @@ import { signout } from "../../../Firebase/SignOut";
 import { Navigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+
 import {
   doc,
   getDocs,
@@ -22,6 +24,8 @@ import {
   onSnapshot,
   query,
   setDoc,
+  where,
+  updateDoc,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -31,15 +35,23 @@ import {
   getBytes,
 } from "firebase/storage";
 import { setuser, setadmin } from "../../../redux/AuthSlice";
+import { useFindAllDevelopers } from "../../components/AllDeveloper.js";
 const Admin = () => {
   const [files, setfiles] = useState([]);
   const [final, setfinal] = useState([]);
   const [approve, setapprove] = useState(false);
   const [slide, setslide] = useState(false);
+  const [currProjectId, setCurrProjectId] = useState();
+  const [showDatepicker, setShowDatepicker] = useState(false);
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
   const { user, isAdmin, name } = useSelector((state) => state.Auth);
   const dispatch = useDispatch();
   const storage = getStorage();
-  
+
+  const { developers, isLoading } = useFindAllDevelopers();
+  // console.log(developers);
+
   const handleslide = () => {
     setslide(!slide);
   };
@@ -63,9 +75,9 @@ const Admin = () => {
     sendpdf(base64);
   };
   const getdata = async (type, clientId, projectId) => {
-    console.log(clientId);
-    console.log(projectId);    
-    
+    // console.log(clientId);
+    // console.log(projectId);
+
     getDownloadURL(ref(storage, `${type}/${clientId}/${projectId}`))
       .then((url) => {
         // `url` is the download URL for 'images/stars.jpg'
@@ -107,7 +119,7 @@ const Admin = () => {
         xhr.send();
 
         window.open(url);
-        console.log(url);
+        // console.log(url);
         // Or inserted into an <img> element
       })
       .catch((error) => {
@@ -133,37 +145,49 @@ const Admin = () => {
   //   };
   //   call();
   // }, []);
-  
+
   const getAllProjects = async () => {
-    const q = query(collection(db, "Projects"));
-    const docSnap = await getDocs(q);
+    const docRef = query(
+      collection(db, "Projects"),
+      where("isComplete", "==", false)
+    );
+    // const q = query(collection(db, "Projects"));
+    const docSnap = await getDocs(docRef);
     // console.log(docSnap);
     if (!docSnap.empty) {
-      const newProjects = docSnap.docs.reduce((acc, doc) => {                 
-        const data = doc._document.data.value.mapValue.fields;
-        if (!files.some((proj) => proj.id === data.id)) {
-          data.id = doc.id
-          acc.push(data);
-        }
-        return acc;
-      }, [...files]);
+      const newProjects = docSnap.docs.reduce(
+        (acc, doc) => {
+          const data = doc._document.data.value.mapValue.fields;
+          if (!files.some((proj) => proj.id === doc.id)) {
+            data.id = doc.id;
+            acc.push(data);
+          }
+          return acc;
+        },
+        [...files]
+      );
       setfiles(newProjects);
     } else {
       console.log("No such document!");
     }
   };
 
-  const accept = async (file, id) => {
+  const accept = async (id) => {
+    console.log("here");
+    
     const DocRef = doc(db, "Projects", id);
     await setDoc(
       DocRef,
       {
         approval: "Approved",
+        startTime: startDate,
+        endTime: endDate,
       },
       { merge: true }
     );
     sendemail(id);
-    getAllProjects();
+    window.location.reload();
+    // getAllProjects();
   };
   const reject = async (id) => {
     const DocRef = doc(db, "Projects", id);
@@ -175,7 +199,9 @@ const Admin = () => {
       { merge: true }
     );
     console.log("success");
-    getAllProjects()
+    window.location.reload();
+
+    // getAllProjects();
   };
   useEffect(() => {
     getAllProjects();
@@ -259,8 +285,18 @@ const Admin = () => {
     });
   };
 
-  // console.log(files);
-  
+  const handleComplete = async (id) => {
+    try {
+      const docRef = doc(db, "Projects", id);
+      await updateDoc(docRef, { isComplete: true });
+      console.log("Document updated successfully!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // console.log("files ", files);
+  // console.log(startDate,endDate);
 
   return (
     <div className="adminMain w-screen h-screen flex justify-between items-center bg-black">
@@ -315,6 +351,7 @@ const Admin = () => {
           </h4>
           <table className=" w-full  ">
             <tbody className=" w-full ">
+              {/* heading */}
               <tr className="  w-full  ">
                 <th>
                   <h4>Client Name</h4>
@@ -329,21 +366,25 @@ const Admin = () => {
                   <h4>Quotation</h4>
                 </th>
                 <th>
-                  <h4>Status</h4>
-                </th>
-                <th>
                   <h4>Approval</h4>
                 </th>
+                <th>
+                  <h4>Status</h4>
+                </th>
               </tr>
+
+              {/* listing */}
               {files &&
-                files.map((c) => {
+                files.map((c, index) => {
                   return (
-                    <tr className=" my-4 py-1 ">
+                    <tr key={index} className=" my-4 py-1 ">
                       <td>{c?.name?.stringValue}</td>
                       <td>{c?.projectname?.stringValue}</td>
                       <td>
                         <button
-                          onClick={() => getdata("docs", c?.clientid?.stringValue,c?.id)}
+                          onClick={() =>
+                            getdata("docs", c?.clientid?.stringValue, c?.id)
+                          }
                           className=" w-max bg-blue-600 px-10 py-1 text-white  rounded-md"
                         >
                           View
@@ -351,7 +392,13 @@ const Admin = () => {
                       </td>
                       <td>
                         <button
-                          onClick={() => getdata("quotation", c?.clientid?.stringValue,c?.id)}
+                          onClick={() =>
+                            getdata(
+                              "quotation",
+                              c?.clientid?.stringValue,
+                              c?.id
+                            )
+                          }
                           className=" w-max bg-blue-600 px-10 py-1 text-white  rounded-md"
                         >
                           View
@@ -372,33 +419,38 @@ const Admin = () => {
                       <td className=" ">
                         {c.approval?.stringValue !== "Pending" ? (
                           <div className=" flex justify-center">
-                            {c?.approval?.stringValue === "Approved" ? (
-                              <button className=" text-green-500 icon">
-                                <DeleteIcon />
-                              </button>
+                            {c?.isComplete?.stringValue === true ? (
+                              // <button
+                              //   onClick={() => handleComplete(c.id)}
+                              //   className=" text-green-500 icon"
+                              // >
+                              //   <DeleteIcon />
+                              // </button>
+                              <p>Completed</p>
                             ) : (
-                              <button className=" text-red-500 icon">
-                                <DeleteIcon />
-                              </button>
+                              // <button
+                              //   onClick={() => handleComplete(c.id)}
+                              //   className=" text-red-500 icon"
+                              // >
+                              //   <DeleteIcon />
+                              // </button>
+                              <p>Working</p>
                             )}
                           </div>
                         ) : (
                           <div className="  text-green-400 ">
-                            <div className="flex justify-center items-center ">
+                            <div className="flex justify-center items-center gap-2">
                               <div
-                                onClick={() =>accept(c?.requirementfile, c?.id)}
+                                onClick={() => {
+                                  // accept(c?.requirementfile, c?.id)
+                                  setShowDatepicker(true);
+                                  setCurrProjectId(c?.id);
+                                }}
                                 className=""
                               >
-                                <CheckBoxIcon
-                                  className=" ico"
-                                  color="green"
-                                  
-                                />
+                                <CheckBoxIcon className=" ico" color="green" />
                               </div>
-                              <div
-                                onClick={() => reject(c?.id)}
-                                className=""
-                              >
+                              <div onClick={() => reject(c?.id)} className="">
                                 <CloseIcon
                                   color="red"
                                   className=" ico"
@@ -424,6 +476,54 @@ const Admin = () => {
       >
         <MenuIcon />
       </button>
+
+      {/* date picker */}
+      <div
+        className={`fixed w-[500px] bg-white z-20 left-[40%] rounded-lg drop-shadow-lg shadow-lg p-2 ${
+          showDatepicker ? "visible" : "hidden"
+        }`}
+      >
+        <h1 className="text-center mt-3 font-bold">
+          Select project completion date
+        </h1>
+        <div className="w-full flex justify-between mt-5 gap-2">
+          {/* start date */}
+          <div className="w-1/2">
+            <h4 className="text-black font-semibold">Start Date:</h4>
+            <input
+              onChange={(e) => setStartDate(e.target.value)}
+              className="w-full p-2"
+              type="date"
+            />
+          </div>
+          <div className="w-1/2">
+            <h4 className="text-black font-semibold">End Date:</h4>
+            <input
+              onChange={(e) => setEndDate(e.target.value)}
+              className="w-full p-2"
+              type="date"
+            />
+          </div>
+        </div>
+
+        <div className="mt-5 w-full">
+          <h4 className="font-semibold text-black">Note (optional):</h4>
+          <textarea
+            className="w-full p-1 min-h-[100px]"
+            placeholder="Add note for developer team"
+          ></textarea>
+        </div>
+
+        {/*accept / reject */}
+        <div className="w-full flex justify-center mt-4">
+          <button
+            onClick={() => accept(currProjectId)}
+            className="text-white bg-green-500 py-3 px-4 rounded-lg"
+          >
+            Approve <ArrowRightAltIcon />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

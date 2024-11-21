@@ -7,6 +7,7 @@ import Test from "./Client_panel/components/Test/Test.jsx";
 import Admin from "./Admin_panel/pages/Admin/Admin.jsx";
 import ProtectedRoute from "./Client_panel/components/Test/ProtectedRoute.js";
 import ClientStatus from "./Client_panel/pages/ClientStatus/ClientStatus.jsx";
+import Developer from "./Developer_pannel/Developer.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
         <Route path="/test" element={<Test />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/projects" element={<ClientStatus />} />
+        <Route path="/developer" element={<Developer />}/>
       </Routes>
     </BrowserRouter>
   );

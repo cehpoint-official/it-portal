@@ -66,20 +66,20 @@ const TagsInput = () => {
     );
   };
   return (
-    <div className=" w-auto h-auto flex  items-center border py-2 ">
-      {apps.map((c, i) => (
-        <Tags key={i} name={c} />
-      ))}
-
-      <input
+    <div className="w-auto h-auto flex items-center border py-1 flex-wrap gap-1">
+        {apps.map((c, i) => (
+          <Tags key={i} name={c} />
+        ))}
+        <input
         onKeyDown={handlechange}
-        className=" w-full h-auto outline-none border-none px-4 flex items-center"
+        className="h-auto outline-none border-none px-4 flex items-center"
         type="text"
         placeholder=" Type"
         onChange={(e) => settagvalue(e.target.value)}
         value={tagvalue}
-      />
-      <button onClick={change} className="">
+        />
+      
+      <button onClick={change} className="fixed right-10">
         <AddCircleIcon />
       </button>
     </div>

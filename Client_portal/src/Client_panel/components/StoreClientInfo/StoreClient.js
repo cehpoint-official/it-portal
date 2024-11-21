@@ -33,6 +33,7 @@ export const storeclient = async (
     approval: "Pending",
     clientid: auth.currentUser.uid,
     name: auth.currentUser.displayName,
+    isComplete:false,
   });
   return newDoc;
 };

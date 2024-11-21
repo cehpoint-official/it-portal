@@ -1,0 +1,7 @@
+table > tbody > .heading > th > h4{
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
